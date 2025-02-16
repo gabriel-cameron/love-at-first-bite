@@ -2,7 +2,7 @@ import React from 'react';
 import { AppBar, Toolbar, IconButton } from '@mui/material';
 import FlatwareIcon from '@mui/icons-material/Flatware';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
@@ -19,7 +19,7 @@ const Header = () => {
           <FlatwareIcon fontSize="medium" />
         </IconButton>
         <IconButton color="black" onClick={() => navigate('/library')}>
-          <LibraryBooksIcon fontSize="medium" />
+          <BookmarksIcon fontSize="medium" />
         </IconButton>
       </Toolbar>
     </AppBar>
