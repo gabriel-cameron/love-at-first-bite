@@ -3,20 +3,20 @@ import { AppBar, Toolbar, IconButton } from '@mui/material';
 import FlatwareIcon from '@mui/icons-material/Flatware';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
-import './Header.css'; // Import the CSS file
+import './Header.css';
 
 const Header = () => {
   return (
     <AppBar position="static" className="header">
       <Toolbar className="toolbar">
-        <IconButton color="primary">
-          <FlatwareIcon />
+        <IconButton color="black">
+          <FlatwareIcon fontSize="large" />
         </IconButton>
-        <IconButton color="primary">
-          <FilterAltIcon />
+        <IconButton color="black">
+          <FilterAltIcon fontSize="large" />
         </IconButton>
-        <IconButton color="primary">
-          <LibraryBooksIcon />
+        <IconButton color="black">
+          <LibraryBooksIcon fontSize="large" />
         </IconButton>
       </Toolbar>
     </AppBar>
