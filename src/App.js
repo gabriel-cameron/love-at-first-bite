@@ -1,18 +1,25 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header';
-import Recipe from './components/Recipe/Recipe';
+import Swipe from './pages/Swipe';
+import Filters from './pages/Filters';
+import Library from './pages/Library';
+import ViewRecipe from './pages/ViewRecipe';
 
 function App() {
   return (
-    <div className="App">
+    <Router>
+      <div className="App">
         <Header />
-        <Recipe />
-        {/* footer */}
-
-        {/* filters screen */}
-        {/* library screen */}
-    </div>
+        <Routes>
+          <Route path="/" element={<Swipe />} /> {/* Swiping page */}
+          <Route path="/filters" element={<Filters />} /> {/* Filters screen */}
+          <Route path="/library" element={<Library />} /> {/* Saved recipes library */}
+          <Route path="/recipe/:id" element={<ViewRecipe />} /> {/* View single saved recipe */}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

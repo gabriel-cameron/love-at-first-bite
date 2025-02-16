@@ -1,11 +1,16 @@
 import React from 'react';
-import { Typography, List, ListItem, ListItemText, Box } from '@mui/material';
+import { Typography, List, ListItem, ListItemText, Box, Rating } from '@mui/material';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import './Recipe.css';
 
 const Recipe = () => {
   const recipe = {
     name: "Creamy Garlic Butter Chicken",
     image: "/butter-chicken.jpg", // ✅ Path from public folder
+    price: 12.99, // Total price
+    servings: 4, // Number of servings
+    rating: 4.5, // Out of 5
+    cookTime: "30 minutes", // Cook time
     ingredients: [
       "2 boneless chicken breasts",
       "3 cloves garlic, minced",
@@ -34,10 +39,28 @@ const Recipe = () => {
 
       {/* Recipe Content */}
       <Box className="recipe-content">
+        {/* Recipe Name */}
         <Typography variant="h4" className="recipe-title">
           {recipe.name}
         </Typography>
 
+        {/* Left-aligned Recipe Details */}
+        <Box className="recipe-details">
+          <Typography variant="h6" className="recipe-price">
+            💰 ${recipe.price.toFixed(2)} • ${ (recipe.price / recipe.servings).toFixed(2) } per serving
+          </Typography>
+          <Box className="recipe-rating">
+            <Rating value={recipe.rating} precision={0.5} readOnly />
+            <Typography variant="body1" className="rating-text">
+              {recipe.rating}/5
+            </Typography>
+          </Box>
+          <Typography variant="h6" className="recipe-time">
+            ⏱ Cook Time: {recipe.cookTime}
+          </Typography>
+        </Box>
+
+        {/* Ingredients List */}
         <Typography variant="h5" className="section-title">Ingredients</Typography>
         <List>
           {recipe.ingredients.map((ingredient, index) => (
@@ -47,6 +70,7 @@ const Recipe = () => {
           ))}
         </List>
 
+        {/* Cooking Instructions */}
         <Typography variant="h5" className="section-title">Instructions</Typography>
         <List>
           {recipe.instructions.map((step, index) => (
