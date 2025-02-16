@@ -1,0 +1,5 @@
+.recipe-photo {
+    width: 100%;  /* Image scales down to screen width */
+    height: auto; /* Keeps aspect ratio */
+    display: block;
+}
