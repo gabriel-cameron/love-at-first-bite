@@ -1,5 +1,84 @@
-.recipe-photo {
-    width: 100%;  /* Image scales down to screen width */
-    height: auto; /* Keeps aspect ratio */
-    display: block;
-}
+/* src/pages/Swipe.css */
+.swipe-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .swipe-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+  
+  .swipe-image.placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    color: #777;
+    height: 200px;
+  }
+  
+  .swipe-recipe-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  
+  .swipe-macros-table {
+    width: 80%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+  }
+  
+  .swipe-macros-table th,
+  .swipe-macros-table td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+    text-align: center;
+  }
+  
+  .swipe-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 1rem;
+  }
+  
+  .swipe-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  .no-button {
+    background-color: #e74c3c;
+  }
+  
+  .info-button {
+    background-color: #3498db;
+  }
+  
+  .yes-button {
+    background-color: #2ecc71;
+  }
+  
+  @media (max-width: 480px) {
+    .swipe-macros-table {
+      width: 100%;
+    }
+    .swipe-buttons {
+      width: 100%;
+    }
+  }
+  

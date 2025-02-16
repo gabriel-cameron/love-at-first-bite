@@ -1,44 +1,128 @@
 // src/pages/Swipe.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Swipe.css';
 
 function Swipe() {
-  // Dummy recipe data—later you'll fetch this from your API.
-  const [recipe, setRecipe] = useState({
-    id: 1,
-    photo: 'butter-chicken.jpg', // Assumes the image is in your public folder
-    name: 'Butter Chicken',
-    rating: 4.5,
-    allergens: 'Dairy',
-  });
+  const [recipe, setRecipe] = useState(null);
+  const [imageName, setImageName] = useState(null);
+  const navigate = useNavigate();
 
-  const handleYes = () => {
-    // TODO: Call API to record "yes" and fetch the next recipe.
-    console.log('Yes clicked for recipe', recipe.id);
+  const loadNextRecipe = async () => {
+    try {
+      // Append a cache-busting query parameter
+      const response = await fetch('/api/swipe?t=' + Date.now(), { cache: 'no-store' });
+      const data = await response.json();
+      setRecipe(data);
+      // Optionally, you can log the response for debugging:
+      console.log('Fetched recipe:', data);
+    } catch (err) {
+      console.error('Error loading next recipe:', err);
+    }
   };
 
-  const handleNo = () => {
-    // TODO: Call API to record "no" and fetch the next recipe.
-    console.log('No clicked for recipe', recipe.id);
+  useEffect(() => {
+    loadNextRecipe();
+  }, []);
+
+  useEffect(() => {
+    const fetchImageFilename = async () => {
+      if (recipe && recipe.endpoint) {
+        try {
+          const response = await fetch(`/api/media/${encodeURIComponent(recipe.endpoint)}`);
+          const data = await response.json();
+          setImageName(data.filename);
+        } catch (err) {
+          console.error('Error fetching image filename:', err);
+        }
+      }
+    };
+    fetchImageFilename();
+  }, [recipe]);
+
+  const handleNo = async () => {
+    if (!recipe) return;
+    try {
+      const response = await fetch('/api/swipe/no', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ endpoint: recipe.endpoint }),
+      });
+      const next = await response.json();
+      setRecipe(next);
+      setImageName(null);
+    } catch (err) {
+      console.error('Error disliking recipe:', err);
+    }
   };
 
-  const handleView = () => {
-    // TODO: Navigate to the full recipe page.
-    console.log('View recipe', recipe.id);
+  const handleYes = async () => {
+    if (!recipe) return;
+    try {
+      const response = await fetch('/api/swipe/like', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ endpoint: recipe.endpoint }),
+      });
+      const next = await response.json();
+      setRecipe(next);
+      setImageName(null);
+    } catch (err) {
+      console.error('Error liking recipe:', err);
+    }
   };
+
+  const handleInfo = () => {
+    if (recipe) {
+      navigate(`/recipe/${recipe.endpoint}`);
+    }
+  };
+
+  if (recipe === null) {
+    return (
+      <div className="swipe-container">
+        <p>No more recipes available.</p>
+      </div>
+    );
+  }
+
+  const cleanEndpoint = recipe.endpoint.replace(/\/$/, '');
+  const imageSrc = imageName ? `/media/${cleanEndpoint}/${imageName}` : '';
 
   return (
     <div className="swipe-container">
-      <div className="recipe-card">
-        <img src={recipe.photo} alt={recipe.name} className="recipe-photo" />
-        <h2>{recipe.name}</h2>
-        <p>Rating: {recipe.rating}</p>
-        <p>Allergens: {recipe.allergens}</p>
-      </div>
+      {imageSrc ? (
+        <img className="swipe-image" src={imageSrc} alt={recipe.name} />
+      ) : (
+        <div className="swipe-image placeholder">Loading image...</div>
+      )}
+      <h2 className="swipe-recipe-name">{recipe.name}</h2>
+      <table className="swipe-macros-table">
+        <thead>
+          <tr>
+            <th>Calories</th>
+            <th>Protein</th>
+            <th>Fat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{recipe.calories}</td>
+            <td>{recipe.protein}</td>
+            <td>{recipe.fat}</td>
+          </tr>
+        </tbody>
+      </table>
       <div className="swipe-buttons">
-        <button className="no-button" onClick={handleNo}>No</button>
-        <button className="view-button" onClick={handleView}>+</button>
-        <button className="yes-button" onClick={handleYes}>Yes</button>
+        <button className="swipe-button no-button" onClick={handleNo}>
+          ✕
+        </button>
+        <button className="swipe-button info-button" onClick={handleInfo}>
+          +
+        </button>
+        <button className="swipe-button yes-button" onClick={handleYes}>
+          ✓
+        </button>
       </div>
     </div>
   );
