@@ -4,6 +4,7 @@ import Recipe from '../components/Recipe/Recipe';
 const Swipe = () => {
     return (
         <Recipe />
+        
       );
 };
 
