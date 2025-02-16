@@ -1,0 +1,35 @@
+³   .gitignore
+³   package-lock.json
+³   package.json
+³   README.md
+³   structure.txt
+ÃÄÄÄpublic
+³       butter-chicken.jpg
+³       favicon.ico
+³       index.html
+³       logo192.png
+³       logo512.png
+³       manifest.json
+³       robots.txt
+³       
+ÀÄÄÄsrc
+    ³   App.css
+    ³   App.js
+    ³   index.css
+    ³   index.js
+    ³   
+    ÃÄÄÄcomponents
+    ³   ÃÄÄÄHeader
+    ³   ³       Header.css
+    ³   ³       Header.js
+    ³   ³       
+    ³   ÀÄÄÄRecipe
+    ³           Recipe.css
+    ³           Recipe.js
+    ³           
+    ÀÄÄÄpages
+            Filters.js
+            Library.js
+            Swipe.js
+            ViewRecipe.js
+            

@@ -1,6 +1,6 @@
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
 import Header from './components/Header/Header';
 import Swipe from './pages/Swipe';
 import Filters from './pages/Filters';
@@ -13,10 +13,10 @@ function App() {
       <div className="App">
         <Header />
         <Routes>
-          <Route path="/" element={<Swipe />} /> {/* Swiping page */}
-          <Route path="/filters" element={<Filters />} /> {/* Filters screen */}
-          <Route path="/library" element={<Library />} /> {/* Saved recipes library */}
-          <Route path="/recipe/:id" element={<ViewRecipe />} /> {/* View single saved recipe */}
+          <Route path="/" element={<Swipe />} />
+          <Route path="/filters" element={<Filters />} />
+          <Route path="/library" element={<Library />} />
+          <Route path="/recipe/:id" element={<ViewRecipe />} />
         </Routes>
       </div>
     </Router>
