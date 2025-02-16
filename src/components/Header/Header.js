@@ -12,11 +12,11 @@ const Header = () => {
   return (
     <AppBar position="static" className="header">
       <Toolbar className="toolbar">
-        <IconButton color="black" onClick={() => navigate('/')}>
-          <FlatwareIcon fontSize="medium" />
-        </IconButton>
         <IconButton color="black" onClick={() => navigate('/filters')}>
           <FilterAltIcon fontSize="medium" />
+        </IconButton>
+        <IconButton color="black" onClick={() => navigate('/')}>
+          <FlatwareIcon fontSize="medium" />
         </IconButton>
         <IconButton color="black" onClick={() => navigate('/library')}>
           <LibraryBooksIcon fontSize="medium" />
