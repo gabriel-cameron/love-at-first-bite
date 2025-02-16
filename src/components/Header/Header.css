@@ -1,0 +1,13 @@
+.header {
+    background-color: #fff;
+    box-shadow: none;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  
